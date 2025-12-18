@@ -47,6 +47,15 @@ body{
     gap: 5px;
 }.popup h2{
     font-size: 2rem;
+}.popup .lixeiras_img{
+    display: flex;
+}.popTutorial{
+    display: flex;
+}.popTutorial .message{
+
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 2rem;
 }
 
 .menu-btn {

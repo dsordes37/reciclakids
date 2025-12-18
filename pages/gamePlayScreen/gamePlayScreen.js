@@ -275,12 +275,13 @@ function verificaVitoria(){
 }
 
 
+//Botão para fechar o popup de tutorial================================================
+const tutorialPopup = document.getElementById("tutorialPopup");
+const tutorialBtn = document.getElementById("popTutorialBtn");
 
-
-
-
-
-
+tutorialBtn.addEventListener("click", ()=>{
+    tutorialPopup.style.display="none";
+})
 
 
 
