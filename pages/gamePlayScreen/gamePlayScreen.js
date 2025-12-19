@@ -1,3 +1,10 @@
+//Audio====================================================
+const coletaSound = document.getElementById('passos');
+const binSound = document.getElementById("binSound");
+
+
+
+
 
 //TABULEIRO================================================================================
 const table={
@@ -224,34 +231,26 @@ function verificaColeta(){
     table.trashList.forEach((trash)=>{
         
         if(character.top===trash.top && character.left===trash.left && trash.onTable){
-            
-            // trash.object.style.display='none';
-            // trash.onTable=false;
-
-            // switch (trash.tipo) {
-            //     case 0:
-            //         character.papel++;
-            //         break;
-            //     case 1:
-            //         character.plastico++;
-            //         break;
-            //     case 2:
-            //         character.metal++;
-            //         break;
-            // }
+        
 
             if(trash.tipo===0 && character.metal===0 && character.plastico===0){
                 trash.object.style.display='none';
                 trash.onTable=false;
                 character.papel++;
+                coletaSound.currentTime = 0.53;
+                coletaSound.play();
             }else if(trash.tipo===1 && character.metal===0 && character.papel===0){
                 trash.object.style.display='none';
                 trash.onTable=false;
                 character.plastico++;
+                coletaSound.currentTime = 0.53;
+                coletaSound.play();
             }if(trash.tipo===2 && character.papel===0 && character.plastico===0){
                 trash.object.style.display='none';
                 trash.onTable=false;
                 character.metal++;
+                coletaSound.currentTime = 0.53;
+                coletaSound.play();
             }
             
         }
@@ -288,7 +287,6 @@ tutorialBtn.addEventListener("click", ()=>{
 
 
 
-
 //MOVIMENTA ÇÃO DO PERSONAGEM=========================================================================
 document.addEventListener('keydown', (key)=>{
       
@@ -300,6 +298,7 @@ document.addEventListener('keydown', (key)=>{
         };
 
         character.imgObj.src = character.rightSprite;
+        
 
     }else if(key.code==='ArrowLeft'){
 
@@ -309,6 +308,7 @@ document.addEventListener('keydown', (key)=>{
         };
 
         character.imgObj.src = character.leftSprite;
+        
     
     }else if(key.code==='ArrowDown'){
 
@@ -318,6 +318,7 @@ document.addEventListener('keydown', (key)=>{
         };
 
         character.imgObj.src = character.frontSprite;
+        
     
     }else if(key.code==='ArrowUp'){
 
@@ -327,8 +328,10 @@ document.addEventListener('keydown', (key)=>{
         };
 
         character.imgObj.src = character.backSprite;
+        
  
-    }else if(key.code=='Enter' && character.left===0){
+    }else if(key.code=='Enter' && character.left===0 && (character.plastico>0 || character.papel>0 || character.metal>0)){
+
         
 
         lixeiras.list.forEach((bin)=>{
@@ -345,6 +348,7 @@ document.addEventListener('keydown', (key)=>{
                         bin.count+=character.papel;
                         bin.placar.innerText=bin.count;
                         character.papel=0;
+                        binSound.play();
                     }
                     
 
@@ -357,9 +361,10 @@ document.addEventListener('keydown', (key)=>{
                         bin.count+=character.plastico;
                         bin.placar.innerText=bin.count;
                         character.plastico=0;
+                        binSound.play();
                     }
 
-                }if(bin.tipo===2){
+                }else if(bin.tipo===2){
                     if(character.plastico>0){
                         addMensagem("plásticco vai na lixeira VERMELHA")
                     }else if(character.papel>0){
@@ -368,6 +373,7 @@ document.addEventListener('keydown', (key)=>{
                         bin.count+=character.metal;
                         bin.placar.innerText=bin.count;
                         character.metal=0;
+                        binSound.play();
                     }
                 }
             }
